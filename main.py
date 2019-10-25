@@ -4,8 +4,51 @@ import sys
 
 
 class Button(QPushButton):
-    def __init__(self, window, x, y):
+    width = 75
+    height = 35
+    button = None
+
+    def __init__(self, window, x, y, text):
         super().__init__()
+        self.window = window
+        self.x = x
+        self.y = y
+        self.text = text
+
+    def makeButton(self):
+        self.button = QPushButton(self.text, self.window)
+        self.button.move(self.x, self.y)
+
+
+class Label(QLabel):
+    label = None
+
+    def __init__(self, window, text, x, y):
+        super().__init__()
+        self.window = window
+        self.text = text
+        self.x = x
+        self.y = y
+
+    def makeLabel(self):
+        self.label = QLabel(self.text, self.window)
+        self.label.move(self.x, self.y)
+
+
+class TextBox(QLineEdit):
+    textbox = None
+
+    def __init__(self, window, x, y, default):
+        super().__init__()
+        self.window = window
+        self.x = x
+        self.y = y
+        self.default = default
+
+    def makeTextBox(self):
+        self.textbox = QLineEdit(self.default, self.window)
+        self.textbox.move(self.x, self.y)
+
 
 
 
@@ -22,11 +65,14 @@ class ToolBox(QDialog):
     def mainMenu(self):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
+        softwareButton = Button(self, 200, 100, 'Software')
+        softwareButton.makeButton()
+        titleLabel = Label(self, 'Hello', 150, 75)
+        titleLabel.makeLabel()
+        testEdit = TextBox(self, 200, 300, 'Enter Here')
+        testEdit.makeTextBox()
         self.show()
-        softwareButton.show()
 
-    def makeButton(self):
-        self.
 
 
 if __name__ == '__main__':
